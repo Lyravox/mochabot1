@@ -26,5 +26,16 @@ class Fun(commands.Cog):
                 else:
                     await interaction.response.send_message("Could not fetch a cat image :(")
         
+    @nextcord.slash_command(description="Returns a random affirmation")
+    async def affirmation(self, interaction: Interaction):
+        async with aiohttp.ClientSession() as session:
+            async with session.get("https://www.affirmations.dev/") as response:
+                if response.status == 200:
+                    data = await response.json()
+                    affirmation = data['affirmation']
+                    await interaction.response.send_message(f"Affirmation: {affirmation}")
+                else:
+                    await interaction.response.send_message("Could not fetch a affirmation :(")
+        
 def setup(bot):
     bot.add_cog(Fun(bot))
