@@ -20,7 +20,9 @@ class Fun(commands.Cog):
                 if response.status == 200:
                     data = await response.json()
                     cat_url = data[0]['url']
-                    await interaction.response.send_message(cat_url)
+                    embed = nextcord.Embed(title="Random Cat", color=0x703c2f)
+                    embed.set_image(url=cat_url)
+                    await interaction.response.send_message(embed=embed)
                 else:
                     await interaction.response.send_message("Could not fetch a cat image :(")
         
