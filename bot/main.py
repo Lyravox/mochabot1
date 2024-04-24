@@ -36,6 +36,7 @@ bot = commands.Bot(
 bot.load_extension('cogs.information')
 bot.load_extension('cogs.fun')
 bot.load_extension('cogs.affirmation')
+bot.load_extension('cogs.moonphase')
 
 @bot.event
 async def on_ready():
