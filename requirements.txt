@@ -3,5 +3,6 @@
 nextcord==2.6.0
 python-dotenv==1.0.1
 aiohttp==3.9.3
+datetime==5.4
 
 # Fun
