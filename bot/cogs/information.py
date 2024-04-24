@@ -6,6 +6,10 @@ class Information(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         
+    @nextcord.slash_command(description="Returns information about the bot")
+    async def info(self, interaction: Interaction):
+        await interaction.response.send_message("You can find my Github repository here: https://github.com/Lyravox/mochabot (More info coming soon!)")        
+        
     @nextcord.slash_command(description="Returns bot latency")
     async def ping(self, interaction: Interaction):
         latency = int(self.bot.latency * 1000)
@@ -27,6 +31,15 @@ class Information(commands.Cog):
         embed.set_thumbnail(icon)
         await interaction.response.send_message(embed=embed)
         
+    @nextcord.slash_command(description="Returns info about a specfic user")
+    async def user(self, interaction: Interaction, member: Member = None):
+        if member is None:
+            member = interaction.user
+        name = member.name
+        avatar = str(member.avatar.url)
+        embed = nextcord.Embed(title=f"{name}'s Info", color=0x703c2f)
+        embed.set_thumbnail(avatar)
+        await interaction.response.send_message(embed=embed)
         
     @nextcord.slash_command(description="Returns a users avatar")
     async def avatar(self, interaction: Interaction, member: Member = None):
@@ -34,9 +47,8 @@ class Information(commands.Cog):
             member = interaction.user
         avatar = str(member.avatar.url)
         name = member.name
-        embed = nextcord.Embed(
-            title=f"{name}'s Avatar", color=0x703c2f)
-        embed.set_image(avatar)
+        embed = nextcord.Embed(title=f"{name}'s Avatar", color=0x703c2f)
+        embed.set_image(url=avatar)
         await interaction.response.send_message(embed=embed)
         
 def setup(bot):
