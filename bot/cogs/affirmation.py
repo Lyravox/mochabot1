@@ -1,8 +1,6 @@
 import nextcord
 from nextcord.ext import commands, tasks
-from nextcord import Interaction, Member, SlashOption
 import aiohttp
-import asyncio
 
 class Affirmation(commands.Cog):
     def __init__(self, bot):
