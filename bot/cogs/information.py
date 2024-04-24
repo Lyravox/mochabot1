@@ -51,5 +51,17 @@ class Information(commands.Cog):
         embed.set_image(url=avatar)
         await interaction.response.send_message(embed=embed)
         
+    @nextcord.slash_command(description="Returns a list of server emojis")
+    async def emojis(self, interaction: Interaction):
+        emojis = interaction.guild.emojis
+    
+        if not emojis:
+            await interaction.response.send_message("No custom emojis found in this guild.")
+        emoji_list = [str(emoji) for emoji in emojis] 
+        emojis_message = " ".join(emoji_list)
+        embed = nextcord.Embed(title="Emoji List", color=0x703c2f)
+        embed.add_field(name="", value=emojis_message)
+        await interaction.response.send_message(embed=embed)
+        
 def setup(bot):
     bot.add_cog(Information(bot))
